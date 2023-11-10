@@ -1,1 +1,17 @@
 /* Empty css file that users can override in their own /static/css/custom.css file */
+
+
+p em {
+    display: block;
+    text-align: center;
+    font-style: italic;
+    font-size: larger;
+}
+/* 
+body {
+    background-color: white;
+} */
+
+html {
+    font-family: auto;
+}

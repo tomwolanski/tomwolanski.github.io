@@ -66,10 +66,10 @@ theme = "Poison"
     sidebar_socials_color = "#FFF"          # default is #FFF
 
     # Hex colors for your content in light mode.
-    code_color = "#000"                     # default is #000
-    code_background_color = "#E5E5E5"       # default is #E5E5E5
-    code_block_color = "#FFF"               # default is #FFF
-    code_block_background_color = "#272822" # default is #272822
+    code_color = "#A00"                     # default is #000
+    code_background_color = "#F00"       # default is #E5E5E5
+    code_block_color = "BBB"               # default is #FFF
+    code_block_background_color = "#F00" # default is #272822
     content_bg_color = "#FAF9F6"            # default is #FAF9F6
     date_color = "#515151"                  # default is #515151
     link_color = "#268BD2"                  # default is #268BD2

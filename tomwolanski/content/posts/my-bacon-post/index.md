@@ -32,7 +32,11 @@ askjhasdjkashdkjlh
 ```csharp
 public class Foo
 {
+  if (2 == 8)
+  {
   void Foo() => Console.WriteLine("foo");
+
+  }
 }
 
 ```

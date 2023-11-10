@@ -1,6 +1,24 @@
 <div class="info">
+
+
+    {{ if .Params.Image }}
+    <p>
+        <!-- <img src="{{ (printf "%s%s" .Permalink .Params.Cover ) }}"><br> -->
+
+        <a href="{{ .Permalink }}">
+            <img src="{{ (printf "%s%s" .Permalink .Params.Image ) }}"  >
+        </a>
+
+
+        <!-- <img src="{{ (printf "%s%s" .Permalink .Params.Image ) }}"> -->
+
+
+    </p>
+    {{ end }}
+
     <h1 class="post-title">
         <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <!-- {{ .Title }} -->
     </h1>
     {{ if .Date }}
         <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z0700" }}" class="post-date">
@@ -24,9 +42,12 @@
         </p>
     {{ end }}
     
-    {{ if .Params.featuredImage }}
+    <!-- {{ if .Params.Image }}
     <p>
-        <img src="{{.Params.featuredImage}}"><br>
+
+        <img src="{{ (printf "%s%s" .Permalink .Params.Image ) }}"><br>
+
+
     </p>
-    {{ end }}
+    {{ end }} -->
 </div>

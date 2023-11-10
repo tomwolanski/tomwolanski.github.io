@@ -23,7 +23,7 @@ It is lightweight and fast - works perfectly as a scratchpad for quick tests. As
 
 The tool is free, however, it does not support intellisense, debugger, or NuGet integration until it is paid for. This can make it hard to discover the full set of abilities and features. This is one of the reasons I decided to show some of the tricks that are available for us today.
 
-[https://www.linqpad.net/](https://www.linqpad.net/")
+[https://www.linqpad.net/](https://www.linqpad.net/)
           
 
 # Running pieces of code

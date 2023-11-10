@@ -3,11 +3,12 @@ title: "A rockstar, a bus, and a world tour - a few thoughts about sharing the k
 date: 2023-11-08T18:03:26+01:00
 cover : "image.jpeg"
 image : "image.jpeg"
+featuredImage: "image.jpeg"
 useRelativeCover : true
 draft: false
 tags:
   - general
-description: "Some thoughts about teamwork, knowledge silos, and overall communication between teams and team members."
+summary: "Some thoughts about teamwork, knowledge silos, and overall communication between teams and team members."
 ---
 
 
@@ -19,7 +20,7 @@ I decided to take an opportunity and sum up some of my thoughts and experiences 
 
 We all heard about rockstar developers. Sometimes this is the way HR describes the job vacancy, the other time a person earns this position. Personally, I don't like this term, I also believe that the situations that lead to a person becoming one should be avoided as much as possible. Please forgive me, if you are a true rockstar language developer.
 
-The book [The Phoenix Project](https://www.goodreads.com/book/show/17255186-the-phoenix-project) introduced a character named Brent. Because of his wide knowledge and experience, he became the only person who could solve an issue. In the short run, the fact that he was a go-to person that can fix anything in just a few minutes was beneficial, but from a wider perspective, it was a disaster waiting to happen. As the story reveals, Brent was a bottleneck in the IT department. Constant interruptions prevented him from doing his own work. The urgency of the tasks caused others to ask him for help and quite often they did not truly understand what the solution actually was. Brent was able to save the situation, but there was no time for him to share his knowledge with others. Even if he was the most helpful person in the room, he slowly became a problem ([1](https://www.freecodecamp.org/news/we-fired-our-top-talent-best-decision-we-ever-made-4c0a99728fde/),[2](https://startupsventurecapital.com/you-fired-your-top-talent-i-hope-youre-happy-cf57c41183dd)).
+The book [The Phoenix Project](https://www.goodreads.com/book/show/17255186-the-phoenix-project) introduced a character named Brent. Because of his wide knowledge and experience, he became the only person who could solve an issue. In the short run, the fact that he was a go-to person that can fix anything in just a few minutes was beneficial, but from a wider perspective, it was a disaster waiting to happen. As the story reveals, Brent was a bottleneck in the IT department. Constant interruptions prevented him from doing his own work. The urgency of the tasks caused others to ask him for help and quite often they did not truly understand what the solution actually was. Brent was able to save the situation, but there was no time for him to share his knowledge with others. Even if he was the most helpful person in the room, he slowly became a problem ([1](https://www.freecodecamp.org/news/we-fired-our-top-talent-best-decision-we-ever-made-4c0a99728fde/), [2](https://startupsventurecapital.com/you-fired-your-top-talent-i-hope-youre-happy-cf57c41183dd)).
 
 _Use the Source, Luke_
 

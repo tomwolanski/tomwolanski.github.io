@@ -1,8 +1,15 @@
 {{ define "main" -}}
+
+
 <div class="posts">
     {{ $frontPageTypes := default (slice "posts") .Site.Params.front_page_content }}
     {{ range (.Paginate (where .Site.RegularPages "Type" "in" $frontPageTypes)).Pages }}
-    <article class="post">
+
+
+
+    <!-- <a href="{{ .Permalink }}"> -->
+    <article class="post"
+             style=" display: block; border-radius: 10px;    box-shadow: 0 4px 8px -2px #000a3c1a; background-color: #fff;" >
         {{ partial "post/info.html" . }}
         {{ .Summary }}
         {{ if .Truncated }}
@@ -11,6 +18,25 @@
         </div>
         {{ end }}
     </article>
+    <!-- </a> -->
+
+<!-- 
+        <article class="post" style="position: relative;    display: flex;    border-radius: 8px;    box-shadow: 0 4px 8px -2px #000a3c1a; background-color: #fff; overflow: hidden; transition: box-shadow .2s; ">
+            
+                <div style=" flex: 1;">
+                    <img src="{{ (printf "%s%s" .Permalink .Params.Cover ) }}" alt="{{ .Params.CoverAlt | plainify | default .Title }}"  />
+                </div>
+                <div style="flex: 2">
+                    {{ partial "post/info.html" . }}
+                    {{ .Summary }}
+                
+                </div>
+
+            
+        </article> -->
+
+
+
     {{- end }}
 </div>
 {{ partial "pagination.html" . }}
