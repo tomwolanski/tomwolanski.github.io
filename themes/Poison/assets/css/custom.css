@@ -23,6 +23,8 @@ html {
 
 .info p {
     margin-bottom: .1rem;
+    margin-left: .1rem;
+    margin-right: .1rem;
 }
 
 .info p img {
@@ -33,6 +35,24 @@ html {
     margin-bottom: 1rem;
 }
 
-/* div.highlight pre {
-    background-color: whitesmoke !important;
-} */
+.sidebar-sticky {
+    height: 100%;
+}
+
+.sidebar {
+    overflow-y: visible ;
+}
+
+.article-toc {
+    max-width: 100%;
+}
+
+.article-toc nav {
+    margin-left: 0px;
+}
+
+.article-toc li.inactive a {
+    font-weight: 300;
+    color: var(--sidebar-p-color);
+
+} 

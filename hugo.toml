@@ -11,6 +11,9 @@ theme = "Poison"
 
 
 
+
+
+
 [markup]
   [markup.highlight]
     anchorLineNos = false
@@ -21,11 +24,14 @@ theme = "Poison"
     lineNoStart = 1
     lineNos = false
     lineNumbersInTable = true
-    noClasses = true
+    noClasses = false
     noHl = false
     style = 'pygments'
-    tabWidth = 4
-
+    tabWidth = 2
+  
+  [markup.tableOfContents]
+    endLevel = 6
+    startLevel = 1
 
 [outputs]
   home = ['HTML', 'JSON']
@@ -37,7 +43,8 @@ theme = "Poison"
     brand = "twonline"                      # name of your site - appears in the sidebar
     # remote_brand_image = 'https://github.com/USERNAME.png' # path to a remote file
     brand_image = "/leming-transformed.jpg"    # path to the image shown in the sidebar
-    description = "I finally decided to write someting. I am sorry..." # Used as default meta description if not specified in front matter
+    # description = "I finally decided to write someting. I am sorry..." # Used as default meta description if not specified in front matter
+    description = "I finally decided to write something. <br /> You've been warned..." # Used as default meta description if not specified in front matter
     dark_mode = false                      # optional - defaults to false
     favicon = "/leming-transformed.jpg"             # path to favicon (defaults to favicon.png)
 
@@ -96,7 +103,7 @@ theme = "Poison"
 
     # Hex colors for your content in dark mode
     code_color_dark = "#FFF"                        # default is #FFF
-    code_background_color_dark = "#F00"          # default is #515151
+    code_background_color_dark = "#515151"          # default is #515151
     code_block_color_dark = "#FFF"                  # default is #FFF
     code_block_background_color_dark = "#272822"    # default is #272822
     content_bg_color_dark = "#121212"               # default is #121212
