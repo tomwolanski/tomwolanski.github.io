@@ -1,15 +1,13 @@
 ---
 title: "Not-so-hidden features of LINQPad"
-date: 2023-11-08T18:03:26+01:00
+date: 2020-08-20
 cover : "image.jpeg"
 image : "image.jpeg"
 useRelativeCover : true
 draft: false
 tags:
   - tools
-description: "An overview of LINQPad."
-
-series: "something"
+summary: "An overview of LINQPad. Description of basic features that make the tool awesome."
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "A rockstar, a bus, and a world tour - a few thoughts about sharing the knowledge"
-date: 2023-11-08T18:03:26+01:00
+date: 2020-11-04
 cover : "image.jpeg"
 image : "image.jpeg"
 featuredImage: "image.jpeg"

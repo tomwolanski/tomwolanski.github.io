@@ -3,7 +3,7 @@ title: "Lorem ipsum"
 date: 2023-11-08T18:03:26+01:00
 cover : "image.jpeg"
 useRelativeCover : true
-draft: false
+draft: true
 tags:
   - tagA
   - tagB
