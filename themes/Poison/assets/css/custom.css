@@ -19,3 +19,20 @@ html {
 .tags {
     margin: 0px 20px;
 }
+
+
+.info p {
+    margin-bottom: .1rem;
+}
+
+.info p img {
+    margin-bottom: .1rem;
+}
+
+.post-date {
+    margin-bottom: 1rem;
+}
+
+/* div.highlight pre {
+    background-color: whitesmoke !important;
+} */

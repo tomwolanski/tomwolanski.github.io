@@ -11,6 +11,21 @@ theme = "Poison"
 
 
 
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_inline = false
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    noHl = false
+    style = 'pygments'
+    tabWidth = 4
+
 
 [outputs]
   home = ['HTML', 'JSON']
@@ -66,10 +81,10 @@ theme = "Poison"
     sidebar_socials_color = "#FFF"          # default is #FFF
 
     # Hex colors for your content in light mode.
-    code_color = "#A00"                     # default is #000
-    code_background_color = "#F00"       # default is #E5E5E5
-    code_block_color = "BBB"               # default is #FFF
-    code_block_background_color = "#F00" # default is #272822
+    code_color = "#000"                     # default is #000
+    code_background_color = "#FFFFFF"       # default is #E5E5E5
+    code_block_color = "#FFFFFF"               # default is #FFF
+    code_block_background_color = "#FFFFFF"    # default is #272822
     content_bg_color = "#FAF9F6"            # default is #FAF9F6
     date_color = "#515151"                  # default is #515151
     link_color = "#268BD2"                  # default is #268BD2
@@ -81,7 +96,7 @@ theme = "Poison"
 
     # Hex colors for your content in dark mode
     code_color_dark = "#FFF"                        # default is #FFF
-    code_background_color_dark = "#515151"          # default is #515151
+    code_background_color_dark = "#F00"          # default is #515151
     code_block_color_dark = "#FFF"                  # default is #FFF
     code_block_background_color_dark = "#272822"    # default is #272822
     content_bg_color_dark = "#121212"               # default is #121212

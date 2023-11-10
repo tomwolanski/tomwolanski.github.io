@@ -107,7 +107,7 @@ body {
 }
 body > .wrapper {
     display: flex;
-    /* height: 100%; */
+    min-height: 100%;
 }
 .container.content {
     overflow-y: auto;
