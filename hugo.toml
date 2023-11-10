@@ -1,4 +1,4 @@
-baseURL = 'https://tomwolanski.github.io/'
+baseURL = 'https://twonline.dev/'
 
 relativeURLs = true
 canonifyURLs = true
@@ -40,7 +40,7 @@ theme = "Poison"
 
 
 [params]
-    brand = "twonline"                      # name of your site - appears in the sidebar
+    brand = "TW online"                      # name of your site - appears in the sidebar
     # remote_brand_image = 'https://github.com/USERNAME.png' # path to a remote file
     brand_image = "/leming-transformed.jpg"    # path to the image shown in the sidebar
     # description = "I finally decided to write someting. I am sorry..." # Used as default meta description if not specified in front matter
