@@ -243,6 +243,19 @@ tbody tr:nth-child(odd) th {
     top: 1rem;
 
 }
+
+
+
+.footnote {
+    
+    position: sticky;
+    position: -webkit-sticky;
+    top: calc(100% - 3rem);
+  }
+
+
+
+
 .article-toc .toc-wrapper{
     /* position: fixed; */
 
@@ -269,14 +282,12 @@ tbody tr:nth-child(odd) th {
 }
 .article-toc li.active {
     font-weight: bold;
-    /* color: white; */
-    color: red;
+
 
 }
 .article-toc li.inactive {
     font-weight: 300;
-    /* color: var(--sidebar-p-color); */
-    color:green;
+
 }
 
 @media screen and (min-width: 100em) {

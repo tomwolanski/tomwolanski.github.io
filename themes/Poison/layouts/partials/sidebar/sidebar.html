@@ -5,11 +5,11 @@
         {{ partial "sidebar/menu.html" . }}
         {{ partial "sidebar/socials.html" . }}
 
-        {{ partial "sidebar/copyright.html" . }}
+        {{ if .TableOfContents }}
+          {{ partial "table_of_contents.html" . }}
+        {{ end }}
         
-        {{ partial "table_of_contents.html" . }}
-
-
+        {{ partial "sidebar/copyright.html" . }}
 
   </div>
 </aside>
