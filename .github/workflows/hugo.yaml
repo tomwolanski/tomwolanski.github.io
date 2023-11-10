@@ -42,11 +42,14 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-          
+
       
       - name: ls
         run: tree
       
+      
+      - name: cd
+        run: cd tomwolanski
       
       
       - name: Install Hugo CLI
