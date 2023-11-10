@@ -34,7 +34,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./tomwolanski
+        working-directory: tomwolanski
 
     env:
       HUGO_VERSION: 0.120.2
