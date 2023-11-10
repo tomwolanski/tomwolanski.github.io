@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5, strong {
 }
 .btn-light-dark {
     padding: 0;
-    margin: 1em;
+    /* margin: 1em; */
     border-radius: 50%;
     border: none;
     cursor: pointer;
@@ -271,24 +271,61 @@ tbody tr:nth-child(odd) th {
     margin-bottom: 0;
     padding: 0;
 }
+
 .article-toc li {
     list-style: none;
-    margin-left: 20px;
     margin-top: 2px;
 }
+
+.article-toc li li {
+    margin-left: 20px;
+}
+
+.article-toc li li li {
+    margin-left: 20px;
+}
+
+.article-toc li li li {
+    margin-left: 20px;
+}
+
+
 .article-toc li a {
     /* color: var(--text-color); */
     text-decoration: none;
 }
-.article-toc li.active {
+
+
+.article-toc a {
+    color: var(--toc-inactive-color);
+} 
+
+.article-toc li.active a {
     font-weight: bold;
-
-
+    color: var(--toc-active-color);
 }
-.article-toc li.inactive {
+
+.article-toc li.inactive a {
     font-weight: 300;
-
+    color: var(--toc-inactive-color);
 }
+
+.article-toc li li.active a {
+    font-weight: bold;
+    color: var(--toc-active-color);
+}
+
+.article-toc li li li.active a {
+    font-weight: bold;
+    color: var(--toc-active-color);
+}
+
+.article-toc li li li li.active a {
+    font-weight: bold;
+    color: var(--toc-active-color);
+}
+
+
 
 @media screen and (min-width: 100em) {
     .article-toc {

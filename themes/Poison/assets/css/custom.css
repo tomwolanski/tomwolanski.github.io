@@ -51,26 +51,27 @@ html {
     margin-left: 0px;
 }
 
-.article-toc a {
+/* .article-toc a {
     color: var(--toc-inactive-color);
-} 
+}  */
 
-.article-toc li.inactive a {
-    color: var(--toc-inactive-color);
-} 
-
-.article-toc ui.inactive a {
-    color: var(--toc-inactive-color);
-}
-
-
+/* 
 .article-toc li.active a {
     color: var(--toc-active-color);
 } 
 
-.article-toc ui.active a {
-    color: var(--toc-active-color);
+.article-toc li.inactive a {
+    color: var(--toc-inactive-color);
+}  */
+
+/* .article-toc ui.inactive a {
+    color: var(--toc-inactive-color);
 }
+ */
+
+/* .article-toc ui.active a {
+    color: var(--toc-active-color);
+} */
 
 /* article .summary {
     margin: 0px 10px;
