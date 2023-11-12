@@ -108,3 +108,6 @@ pre code {
     outline: none;
   }
   
+  .content {
+    min-height: 100vh;
+  }

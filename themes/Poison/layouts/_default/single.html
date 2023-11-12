@@ -1,4 +1,6 @@
 {{ define "main" -}}
+<a id="content-start" />
+
 <div class="post" >
 
   {{ if .Params.Image }}
@@ -60,7 +62,7 @@
     if (isMobile && !window.location.hash)
     {
       const url = window.location.href;
-      window.location.assign(url + "#contents");
+      window.location.assign(url + "#content-start");
     }
 
   })();
