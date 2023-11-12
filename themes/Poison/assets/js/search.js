@@ -9,10 +9,38 @@ const fuseOptions = {
   minMatchCharLength: 1,
   keys: [
     {name:"title",weight:0.8},
-    {name:"contents",weight:0.5},
+    {name:"summary",weight:0.7},
+    {name:"content",weight:0.5},
     {name:"tags",weight:0.3},
     {name:"categories",weight:0.3}
   ]
+}
+
+const input = document.getElementById('searchInput')
+const results = document.getElementById('searchResults')
+
+const doSearch = function(fuse, value) {
+  const items = fuse.search(value)
+
+  if (items.length > 0) {
+    let itemList = ''
+
+    itemList  += `<ul class="entries">`
+
+    for (let i in items) {
+
+      itemList += `<li>`
+              +  `   <span class="title"> <a href="${items[i].item.permalink}">${items[i].item.title}</a> </span>`
+              +  `   <span class="published"> <time class="pull-right post-list">${items[i].item.date}</time> </span>`
+              +  `</li>`
+    }
+
+    itemList += `</ul>`
+
+    results.innerHTML = itemList
+  } else {
+    results.innerHTML = ''
+  }
 }
 
 const setupSearch = function() {
@@ -21,31 +49,12 @@ const setupSearch = function() {
     .then(data => {
       const fuse = new Fuse(data, fuseOptions)
 
-      const input = document.getElementById('searchInput')
-      const results = document.getElementById('searchResults')
+      if (input.value) {
+        doSearch(fuse, input.value);
+      }
 
       input.addEventListener('keyup', (e) => {
-        const items = fuse.search(e.target.value)
-
-        if (items.length > 0) {
-          let itemList = ''
-
-          itemList  += `<ul class="entries">`
-
-          for (let i in items) {
-
-            itemList += `<li>`
-                    +  `   <span class="title"> <a href="${items[i].item.permalink}">${items[i].item.title}</a> </span>`
-                    +  `   <span class="published"> <time class="pull-right post-list">${items[i].item.date}</time> </span>`
-                    +  `</li>`
-          }
-
-          itemList += `</ul>`
-
-          results.innerHTML = itemList
-        } else {
-          results.innerHTML = ''
-        }
+        doSearch(fuse, e.target.value);
       });
 
       // Prevent search clears
