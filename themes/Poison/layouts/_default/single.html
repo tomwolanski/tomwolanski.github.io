@@ -53,22 +53,6 @@
 
 </div>
 
-
-<script lang="js">
-  (() => {
-
-    let isMobile = window.matchMedia("(max-width: 48em)").matches;
-    console
-    if (isMobile && !window.location.hash)
-    {
-      const url = window.location.href;
-      window.location.assign(url + "#content-start");
-    }
-
-  })();
-</script>
-
-
 {{- end }}
 {{ define "sidebar" }}
 

@@ -19,14 +19,13 @@
 {{/* Personal/custom scripts for codeblocks */}}
 {{ $js = $js | append (resources.Get "js/codeblock.js") }}
 
-
-
 {{/* Personal/custom scripts for fuzzy search */}}
 {{ $js = $js | append
       (resources.Get "js/fuse.basic.min.js")
       (resources.Get "js/search.js") }}
 
-
+{{/* Scroll to content on mobile */}}
+{{ $js = $js | append (resources.Get "js/gotop.js") }}
 
 {{ $js_bundle := $js | resources.Concat "js/bundle.js" | minify | fingerprint }}
 
@@ -40,5 +39,3 @@
 {{ if hugo.IsProduction -}}
   {{ template "_internal/google_analytics.html" . -}}
 {{ end -}}
-
-

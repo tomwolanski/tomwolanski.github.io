@@ -11,9 +11,6 @@ theme = "Poison"
 
 
 
-
-
-
 [markup]
   [markup.highlight]
     anchorLineNos = false
@@ -37,6 +34,9 @@ theme = "Poison"
   home = ['HTML', 'JSON']
 
 
+[services]
+  [services.googleAnalytics]
+    ID = 'UA-4808430-1'
 
 
 [params]
@@ -58,7 +58,7 @@ theme = "Poison"
     #     # Limit:        If the files should be listed, how many should be shown.
     # menu = [
     #     {Name = "About", URL = "/about/"},
-    #     {Name = "🔍 Search", URL = "/search/", External = true},
+    #     {Name = "🔍 Search", URL = "/search/", External = true
     #     {Name = "📄 Post", URL = "/posts/", External = true},
     #     {Name = "🔖 Tags", URL = "/tags/", External = true}
         
