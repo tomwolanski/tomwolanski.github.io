@@ -9,11 +9,6 @@ console.info('go top');
 
     if (top && isMobile && !window.location.hash)
     {
-        
-
-       const url = window.location.href;
-
-       console.info(url);
-       window.location.assign(url + "#content-start");
+        top.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     }
 })();
