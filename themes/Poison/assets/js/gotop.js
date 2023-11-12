@@ -9,6 +9,6 @@ console.info('go top');
 
     if (top && isMobile && !window.location.hash)
     {
-        top.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        top.scrollIntoView(true);
     }
 })();
