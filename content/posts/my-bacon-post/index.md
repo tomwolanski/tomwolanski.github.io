@@ -27,61 +27,52 @@ $$ 5 \times 5 = 25 $$
 Bacon ipsum dolor amet hamburger capicola buffalo venison, shankle pig drumstick frankfurter jerky ground round brisket doner. Doner sirloin flank picanha t-bone ham hock. Landjaeger spare ribs ground round t-bone, tri-tip ribeye bresaola buffalo pork loin pork chop meatball jerky biltong. Bacon kevin capicola, shankle tenderloin ground round pancetta venison biltong. Meatball pork belly fatback, corned beef short ribs cupim turkey salami beef ribs. Rump tongue kielbasa pig shank burgdoggen, brisket filet mignon ball tip ribeye cow venison.
 
 
-{{</* tabs tabTotal="2" */>}}
-
-{{%/* tab tabName="First Tab" */%}}
-This is markdown content.
-{{%/* /tab */%}}
-
-{{</* tab tabName="Second Tab" */>}}
-{{</* highlight text */>}}
-This is a code block.
-{{</* /highlight */>}}
-{{</* /tab */>}}
-
-{{</* /tabs */>}}
 
 # bbbb
-askjhasdjkashdkjlh
+askjhasdjkashdkjlh111111111111111111111
+
+{{< gist tomwolanski a6a4aea48bb3932be58ac250afad81f2 >}}
 
 
 lkasjdklsajdslakdj
 
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 
 
 ```csharp
-namespace SimpleActor.Core
+public interface IDataService
 {
-	public sealed class Actor
-	{
-		private readonly Channel<(object, Actor)> _mailbox = Channel.CreateUnbounded<(object, Actor)>();
-
-		private readonly Action<object, Actor> _handler;
-
-		public Actor(Action<object, Actor> handler)
-		{
-			_handler = handler;
-
-			Task.Run(Loop);
-		}
-
-		public void Tell(object message, Actor sender = null)
-		{
-			var pair = (message, sender);
-			_mailbox.Writer.TryWrite(pair);
-		}
-
-		public void GracefulStop() => _mailbox.Writer.Complete();
-
-		private async Task Loop()
-		{
-			await foreach (var pair in _mailbox.Reader.ReadAllAsync())
-			{
-				var (message, sender) = pair;
-				_handler(message, sender);
-			}
-		}
-	}
+  string Get(int id);
+}
+public sealed class WebDataService : IDataService
+{
+  public string Get(int id)
+  {
+    using (var client = new WebClient())
+      return client.DownloadString("https://www.example.com/api/values/" + id);
+  }
+}
+public sealed class BusinessLogic
+{
+  private readonly IDataService _dataService;
+  public BusinessLogic(IDataService dataService)
+  {
+    _dataService = dataService;
+  }
+  public string GetFrob()
+  {
+    // Try to get the new frob id.
+    var result = _dataService.Get(17);
+    if (result != string.Empty)
+      return result;
+    // If the new one isn't defined, get the old one.
+    return _dataService.Get(13);
+  }
 }
 
 ```

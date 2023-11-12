@@ -253,6 +253,14 @@ tbody tr:nth-child(odd) th {
     top: calc(100% - 3rem);
   }
 
+ @media (max-width: 48em) {
+    .footnote {
+        position: relative;
+        margin-top: 1rem;
+        bottom: 0px;
+      }
+}
+
 
 
 

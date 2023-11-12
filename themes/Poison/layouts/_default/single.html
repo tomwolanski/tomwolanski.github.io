@@ -1,18 +1,75 @@
 {{ define "main" -}}
 <div class="post" >
-  {{ partial "post/info-full.html" . }}
-<!-- 
-  <img src="{{ (printf "%s%s" .Permalink .Params.Cover ) }}" alt="{{ .Params.CoverAlt | plainify | default .Title }}" /> -->
 
-  {{ .Content }}
-  {{ partial "post/navigation.html" . }}
-  {{ if or (.Site.Params.remark42) (.Site.DisqusShortname) }}
-    {{ partial "post/comments.html" . }}
-  {{ end }}
+  {{ if .Params.Image }}
+        <img src="{{ (printf "%s%s" .Permalink .Params.Image ) }}"  >
+    {{ end }}
+
+
+
+  <div class="art-page-content">
+
+
+  <div class="info">
+
+    
+
+    <h1 class="post-title">
+        {{ .Title }}
+    </h1>
+
+    {{ if .Date }}
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z0700" }}" class="post-date">
+            {{ .Date.Format "January 2, 2006" }}
+        </time>
+    {{ end }}
+    {{ if .Params.tags }}
+    <ul class="tags">
+        {{ range .Params.tags }}
+        <li class="tag-{{ . }}">
+            <a href="{{ "tags/" | absLangURL }}{{ . | urlize }}">{{ . }}</a>
+        </li>
+        {{ end }}
+    </ul>
+    {{ end }}
+    
+    {{ $Site := .Site }}
+    {{ if .Params.series }}
+        <p class="seriesname">
+            Series: <a href="{{ $Site.BaseURL }}series/{{ .Params.series | urlize }}">{{ .Params.series }}</a>
+        </p>
+    {{ end }}
+
+  </div>
+    {{ .Content }}
+    {{ partial "post/navigation.html" . }}
+    {{ if or (.Site.Params.remark42) (.Site.DisqusShortname) }}
+      {{ partial "post/comments.html" . }}
+    {{ end }}
+
+  </div>
+
 </div>
+
+
+<script lang="js">
+  (() => {
+
+    let isMobile = window.matchMedia("(max-width: 48em)").matches;
+    console
+    if (isMobile && !window.location.hash)
+    {
+      const url = window.location.href;
+      window.location.assign(url + "#contents");
+    }
+
+  })();
+</script>
+
+
 {{- end }}
 {{ define "sidebar" }}
-  <!-- {{ if and (not .Params.hideToc) (not .Site.Params.hideToc) }}
-    {{ partial "table_of_contents.html" . }}
-  {{ end }} -->
+
 {{ end }}
+
+

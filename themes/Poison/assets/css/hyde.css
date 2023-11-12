@@ -38,12 +38,12 @@ html {
 }
 @media (min-width: 48em) {
   html {
-    font-size: 16px;
+    /* font-size: 16px; */
   }
 }
 @media (min-width: 58em) {
   html {
-    font-size: 20px;
+    /* font-size: 20px; */
   }
 }
 
@@ -59,7 +59,7 @@ pre {
  */
 
 .sidebar {
-  text-align: center;
+  text-align: left;
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
   flex-shrink: 0;
@@ -70,7 +70,6 @@ pre {
     left: 0;
     bottom: 0;
     width: 18rem;
-    text-align: left;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgb(70, 70, 70) auto;
@@ -143,7 +142,7 @@ a.sidebar-nav-item:focus {
  * Add the `sidebar-sticky` class to the sidebar's container to affix it the
  * contents to the bottom of the sidebar in tablets and up.
  */
-
+ 
 @media (min-width: 48em) {
   .sidebar-sticky {
     top: 1rem;
