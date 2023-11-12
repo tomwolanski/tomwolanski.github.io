@@ -14,9 +14,8 @@ body.layout-reverse .wrapper {
 @media (min-width: 48em) {
     .bullet {
         margin-left: 1em;
-        text-decoration-line: underline;
-        text-decoration-style: dotted;
-        text-decoration-thickness: 1%;
+        margin: .5rem;
+        
     }
     .sub-heading {
         margin-left: 1em;

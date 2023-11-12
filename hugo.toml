@@ -48,21 +48,21 @@ theme = "Poison"
     dark_mode = false                      # optional - defaults to false
     favicon = "/leming-transformed.jpg"             # path to favicon (defaults to favicon.png)
 
-    front_page_content = ["posts"] # Equivalent to the default value, add page bundle names to include them on the front page.
+   # front_page_content = ["posts"] # Equivalent to the default value, add page bundle names to include them on the front page.
 
-    # MENU PLACEHOLDER
-    # Menu dict keys:
-        # Name:         The name to display on the menu.
-        # URL:          The directory relative to the content directory.
-        # HasChildren:  If the directory's files should be listed.  Default is true.
-        # Limit:        If the files should be listed, how many should be shown.
-    menu = [
-        {Name = "About", URL = "/about/"},
-        # {Name = "Posts", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 5},
-        {Name = "Post", URL = "/posts/"},
-        {Name = "Tags", URL = "/tags/"},
-        {Name = "Search", URL = "/search/"},
-    ]
+    # # MENU PLACEHOLDER
+    # # Menu dict keys:
+    #     # Name:         The name to display on the menu.
+    #     # URL:          The directory relative to the content directory.
+    #     # HasChildren:  If the directory's files should be listed.  Default is true.
+    #     # Limit:        If the files should be listed, how many should be shown.
+    # menu = [
+    #     {Name = "About", URL = "/about/"},
+    #     {Name = "🔍 Search", URL = "/search/", External = true},
+    #     {Name = "📄 Post", URL = "/posts/", External = true},
+    #     {Name = "🔖 Tags", URL = "/tags/", External = true}
+        
+    # ]
 
     # Links to your socials.  Comment or delete any you don't need/use. 
     

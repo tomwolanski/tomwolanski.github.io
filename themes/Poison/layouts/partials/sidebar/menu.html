@@ -1,7 +1,26 @@
 <nav>
-    <ul class="sidebar-nav" >
+    <ul class="sidebar-nav">
 
-        {{ $sections := .Site.Sections.ByTitle }}
+
+        <li class="bullet menu-search">
+            <a href="/search/" >🔍 Search</a>
+        </li>
+
+        <li class="bullet menu-posts">
+            <a href="/posts/" >📝 Posts</a>
+        </li>
+
+        <li class="bullet menu-tags">
+            <a href="/tags/" >🔖 Tags</a>
+        </li>
+
+        <!-- {Name = "About", URL = "/about/"},
+        {Name = "🔍 Search", URL = "/search/", External = true},
+        {Name = "📄 Post", URL = "/posts/", External = true},
+        {Name = "🔖 Tags", URL = "/tags/", External = true} -->
+
+
+        <!-- {{ $sections := .Site.Sections.ByTitle }}
         {{ $taxonomies := .Site.Taxonomies }}
         {{ range .Site.Params.menu }}
         {{ $menu_item := . }}
@@ -55,7 +74,7 @@
                     {{ end }}
                 {{ end }}
             {{ end }}
-        {{ end }}
+        {{ end }} -->
 
     </ul>
 </nav>
