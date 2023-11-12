@@ -47,7 +47,7 @@ const setupSearch = function() {
     fetch('../index.json')
     .then(resp => resp.json())
     .then(data => {
-      const fuse = new Fuse(data, fuseOptions)
+      const fuse = new Fuse(data, fuseOptions);
 
       if (input.value) {
         doSearch(fuse, input.value);
@@ -64,5 +64,6 @@ const setupSearch = function() {
         }
       });
 
+      input.disabled = false;
     });
 }
