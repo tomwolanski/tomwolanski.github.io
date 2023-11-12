@@ -59,8 +59,9 @@ theme = "Poison"
     menu = [
         {Name = "About", URL = "/about/"},
         # {Name = "Posts", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 5},
-        {Name = "Posts", URL = "/posts/"},
+        {Name = "Post", URL = "/posts/"},
         {Name = "Tags", URL = "/tags/"},
+        {Name = "Search", URL = "/search/"},
     ]
 
     # Links to your socials.  Comment or delete any you don't need/use. 
