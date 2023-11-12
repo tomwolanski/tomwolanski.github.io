@@ -76,13 +76,9 @@ pre code {
     margin-top: 0px;
 }
 
-
-
-
-
 .search-container {
     max-width: 720px;
-    padding: 1rem 1rem;
+    padding: 1rem .1rem;
     margin: 0 auto;
   }
   
@@ -92,18 +88,19 @@ pre code {
     align-items: center;
     border: 1px solid var(--text-color);
     border-radius: 10px;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2rem;
   }
 
   .search label {
     position: absolute;
-    left: 1.6rem;
+    left: .6rem;
+    top: .6rem;
     color: var(--text-color);
   }
 
   .search input {
     width: 100%;
-    padding: 1.2rem 1.2rem 1.2rem 4.8rem;
+    padding: .5rem .5rem .5rem 2.5rem;
     font-size: 1.25rem;
     line-height: 1.25rem;
     border: 0;
