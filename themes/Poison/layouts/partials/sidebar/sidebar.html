@@ -6,7 +6,7 @@
         {{ partial "sidebar/menu.html" . }}
         {{ partial "sidebar/socials.html" . }}
 
-        {{ if .TableOfContents }}
+        {{ if and (not .Page.Params.hideToc) .TableOfContents }}
           {{ partial "table_of_contents.html" . }}
         {{ end }}
         
