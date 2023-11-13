@@ -4,7 +4,7 @@ date: 2020-11-29
 cover : "image-12.png"
 image : "image-12.png"
 useRelativeCover : true
-draft: true
+draft: false
 hideToc : false
 tags:
   - practices
