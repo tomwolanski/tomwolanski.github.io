@@ -7,15 +7,9 @@
         <img src="{{ (printf "%s%s" .Permalink .Params.Image ) }}"  >
     {{ end }}
 
-
-
   <div class="art-page-content">
 
-
   <div class="info">
-
-    
-
     <h1 class="post-title">
         {{ .Title }}
     </h1>
@@ -44,14 +38,57 @@
 
   </div>
     {{ .Content }}
+
+    <script 
+        id="giscus-comments"
+        src="https://giscus.app/client.js"
+        data-repo="tomwolanski/tomwolanski.github.io"
+        data-repo-id="R_kgDOKb92Tw"
+        data-category="Post Comments"
+        data-category-id="DIC_kwDOKb92T84Ca6TB"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+    <script defer language="javascript" type="text/javascript">
+
+      (() => {
+        const giscusComments = document.querySelector("#giscus-comments");
+
+        const themeFromLS = localStorage.getItem("theme")
+        const themeFromHugo = document.body.classList.contains("dark-theme") ? "dark" : null
+        const currentTheme = themeFromLS ? themeFromLS : themeFromHugo;
+
+        if (currentTheme && giscusComments) {
+          giscusComments.setAttribute("data-theme", currentTheme);
+        }
+      })();
+
+    </script>
+
     {{ partial "post/navigation.html" . }}
-    {{ if or (.Site.Params.remark42) (.Site.DisqusShortname) }}
+    <!-- {{ if or (.Site.Params.remark42) (.Site.DisqusShortname) }}
       {{ partial "post/comments.html" . }}
-    {{ end }}
+    {{ end }} -->
+
 
   </div>
 
 </div>
+
+
+
+
+
+
 
 {{- end }}
 {{ define "sidebar" }}

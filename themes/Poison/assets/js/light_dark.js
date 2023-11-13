@@ -25,9 +25,7 @@ btn.addEventListener("click", function () {
         theme = "dark";
         moon.style.display = 'none';
         sun.style.display = 'block';
-        if (hasComments) {
-            window.REMARK42.changeTheme("dark");
-        }
+
     } else {
         moon.style.display = 'block';
         sun.style.display = 'none';
@@ -36,4 +34,24 @@ btn.addEventListener("click", function () {
         }
     }
     localStorage.setItem("theme", theme);
+    changeGiscusTheme(theme);
 });
+
+  localStorage.setItem("theme", currentTheme);
+
+  function changeGiscusTheme (theme) {
+    function sendMessage(message) {
+      const iframe = document.querySelector('iframe.giscus-frame');
+
+        console.info("setting theme", iframe);
+
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: theme
+      }
+    });
+  }
