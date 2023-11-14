@@ -8,7 +8,7 @@ draft: false
 hideToc : true
 tags:
   - performance
-summary: "An overview of LINQPad. Description of basic features that make the tool awesome."
+summary: "Some shenanigans with the FizzBuzz puzzle. I decided to challenge myself to overcomplicate it during fictional interview."
 
 ---
 
