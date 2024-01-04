@@ -1,15 +1,15 @@
 ---
-title: "Introduction to Redis scripting and concurrency conflicts"
-date: 2023-11-13
+title: "Introduction to Redis scripting to detect write concurrency conflicts"
+date: 2024-01-04
 cover : "image.png"
 image : "image.png"
 useRelativeCover : true
-draft: true
+draft: false
 hideToc : false
 tags:
   - concurrency
   - redis
-summary: "A practical example of how to implement concurrency validation (optimistic locking) for Redis documents."
+summary: "Introduction to Redis Lua scripts and a practical example of how to implement concurrency conflict detection (optimistic locking) for Redis documents."
 
 ---
 
@@ -422,13 +422,15 @@ All entries marked as `[0 lua]` are actual commands executed by the script.
 
 Redis script cache, however, has its eviction policies, and cannot quarantine that the script will be cached there forever. This is especially true when Redis is running as a cluster with multiple nodes that can be restarted. `StackExchange.Redis` handles this scenario without any manual interaction and inserts it back into the cache again.
 
-Lets see this in action by manually removing all scripts from the cache using redis-cli:
+Let's see this in action by manually removing all scripts from the cache using `redis-cli`:
 ```
 > script flush
 "OK"
 ```
 
-what we will notice in logs is that:
+and attempt to call our endpoint again.
+
+What we will notice in the logs is that:
 1. the client attempted to run the script using `EVALSHA` and SHA
 1. we can assume the action failed since the client repeats the pattern we saw before `SCRIPT LOAD` and `EVAL` 
 
@@ -440,6 +442,6 @@ what we will notice in logs is that:
 00:39:35.895 [0 lua] "get" "my-other-key3"
 ```
 
-
-
 ## Summary
+
+Redis can be really powerful data storage. Despite some limitations of the protocol, it allows the implementation of almost any logic via Lua scripting. One of the problems that can be solved that way is concurrency conflict detection, a technique well known from other databases.
