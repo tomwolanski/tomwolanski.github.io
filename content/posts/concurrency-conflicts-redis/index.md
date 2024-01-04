@@ -51,7 +51,8 @@ await transaction.ExecuteAsync();
 ```
 
 But any attempt to make a conditional statement a part of this transaction would result in deadlock. As a matter of fact, awaiting any of the tasks returned by `transaction.*Async()` before `transaction.ExecuteAsync()` finishes will cause a deadlock.
-Deadlock is a quirk how the `StackExchange.Redis` works, but such a structure cannot even be expressed by `Redis` commands at all.
+Deadlock is a quirk how the `StackExchange.Redis` works, but such a structure cannot even be expressed by Redis commands at all.
+
 ```csharp
 using StackExchange.Redis;
 
@@ -59,7 +60,8 @@ IDatabase database = ...
 
 var transaction = database.CreateTransaction();
 
-var value = await transaction.StringGetAsync("key_1");   // this task has no chance of being completed before transaction is executed...
+// this task has no chance of being completed before transaction is executed...
+var value = await transaction.StringGetAsync("key_1");   
 
 if (value == "some_value")
 {
@@ -68,8 +70,14 @@ if (value == "some_value")
         "value_2");
 }
 
-await transaction.ExecuteAsync();   // ...witch will never happen, because we never reach this line
+// ...which will never happen, because we never reach this line
+await transaction.ExecuteAsync();   
 ```
+
+This is because Redis transaction is not the same as a transaction we may know from T-SQL. It is just a way of grouping commands together and there is no way to translate such conditional statement to a valid set of commands.
+
+From Redis website:
+> A Redis Transaction is entered using the MULTI command. The command always replies with OK. At this point the user can issue multiple commands. Instead of executing these commands, Redis will queue them. All the commands are executed once EXEC is called.
 
 ### Lua scripting to the rescue
 
