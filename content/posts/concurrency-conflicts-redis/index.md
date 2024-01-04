@@ -422,12 +422,11 @@ All entries marked as `[0 lua]` are actual commands executed by the script.
 
 Redis script cache, however, has its eviction policies, and cannot quarantine that the script will be cached there forever. This is especially true when Redis is running as a cluster with multiple nodes that can be restarted. `StackExchange.Redis` handles this scenario without any manual interaction and inserts it back into the cache again.
 
-Let's see this in action by manually removing all scripts from the cache using `redis-cli`:
+Let's see this in action by manually removing all scripts from the cache using Redis CLI
 ```
 > script flush
 "OK"
 ```
-
 and attempt to call our endpoint again.
 
 What we will notice in the logs is that:
