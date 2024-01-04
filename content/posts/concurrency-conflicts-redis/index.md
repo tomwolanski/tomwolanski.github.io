@@ -407,7 +407,7 @@ A similar exception is thrown but with a message: `Version mismatch: expected ve
 
 One who is familiar with T-SQL stored procedures may argue, that this approach may be terribly inefficient since we send the script to Redis all the time. One may argue that we use Redis for efficiency and small response latency, but now we introduce a huge payload that needs to be sent all the time.
 
-The good news is - that's not the case. A full script is send to Redis server during the first call. We can see it if we enable logging we can notice that it is sent twice. First time using `SCRIPT LOAD` to add it to script cache, later using `EVAL` to actually execute it. I assume this is done by the design of `StackExchange.Redis` to add the script to the cache and execute it during the same roundtrip. 
+The good news is - that's not the case. A full script is sent to Redis server during the first call. When we peek into Redis logs (via redis-cli monitor command), we will notice that the whole script is only sent twice. First time using `SCRIPT LOAD` to add it to the script cache, and later using `EVAL` to actually execute it. I assume this is done by the design of `StackExchange.Redis` to add the script to the cache and execute it during the same roundtrip. 
 
 
 ```
@@ -418,7 +418,7 @@ The good news is - that's not the case. A full script is send to Redis server du
 00:23:52.149 [0 lua] "expire" "my-key" "300"
 ```
 
-What about subsequent calls? The first time `SCRIPT LOAD` was called Redis returned a SHA of the script that can later be used as a reference. Any subsequent calls will be done  using `EVALSHA` command which does not require sending full script code.
+What about subsequent calls? The first time `SCRIPT LOAD` was called Redis returned a SHA of the script that can later be used as a reference. Any subsequent calls will be done using `EVALSHA` command which does not require sending the full script code.
 All entries marked as `[0 lua]` are actual commands executed by the script.
 
 ```
