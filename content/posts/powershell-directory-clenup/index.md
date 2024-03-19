@@ -9,7 +9,7 @@ hideToc : false
 tags:
   - tools
   - PowerShell
-summary: "A useful tool to remove stale and unused directories."
+summary: "An overview of a script I wrote to remove stale and unused `bin`, `obj` and `node_modules` directories from my drive."
 ---
 
 ## Problem
