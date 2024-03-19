@@ -9,12 +9,12 @@ hideToc : false
 tags:
   - tools
   - PowerShell
-summary: "An overview of a script I wrote to remove the stale and unused `bin, `obj`, and `node_modules` directories from my drive."
+summary: "An overview of a script I wrote to remove the stale and unused `bin`, `obj`, and `node_modules` directories from my drive."
 ---
 
 ## Problem
 
-With multiple projects stored on my drive, I started to run out of space. In such dire times I installed my first go-to tool in such situations is [WinDirStat](https://windirstat.net/). 
+With multiple projects stored on my drive, I started to run out of space. In such dire times I installed my first go-to tool in such situations - [WinDirStat](https://windirstat.net/). 
 It is a great tool to search for bloated files and directories, from a "top-down" perspective. My case was different. I know that the majority of trash in my system are various `bin`, `obj`, and even some (shivers...) `node_modules`.
 
 For instance, let's assume my work directory looks like this. For simplification, I added only directories that are useful for the demo (with some artificially bloated `bin` directories).
