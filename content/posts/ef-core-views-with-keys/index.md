@@ -1,5 +1,5 @@
 ---
-title: "EF Core configuration hiccups - invalid data when using views with keys"
+title: "EF Core configuration hiccups - invalid data when using views with primary keys"
 date: 2025-02-03
 cover : "title.png"
 image : "title.png"
