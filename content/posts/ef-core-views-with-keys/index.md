@@ -15,7 +15,7 @@ summary: "Investigation of an interesting bug caused by misconfiguration of EF C
 A colleague of mine noticed a strange behavior of our system he was working on and asked me for help. This article describes the issue we noticed, the cause and possible solutions. 
 
 Before we start, I'd like to give some context - the system we will be looking at today uses a CQRS approach, where we have a few practices enforced:
-- commands are always executed against the tb tables
+- commands are always executed against the db tables
 - queries are always using views to fetch data
 
 Those practices led to a configuration issue that was hidden by other settings. 
