@@ -20,6 +20,11 @@ Before we start, I'd like to give some context - the system we will be looking a
 
 Those practices led to a configuration issue that was hidden by other settings. 
 
+You can fetch the script describing the issue using the {{< a href="ef_core_views_with_primary_keys_sample.linq" download="ef_core_views_with_primary_keys_sample.linq" >}}
+sample LINQPad snippet {{< /a >}}.
+
+
+
 ## Problem
 
 > The database in this article is not a real one where the issue occurred. 
