@@ -212,14 +212,15 @@ Memory profiler allows us to see what exactly happened:
 ![memory profiler showing difference of two snapshots](memory_profiler.png)
 
 By forcing the `DoStuffAsync` to finished asynchronously, the async state machine could no longer remain on the stack, had to be boxed into `syncTaskMethodBuilder+AsyncStateMachineBox<...>` type and moved to the heap. Unlike to stack, the heap can grow to accommodate all our boxed instances. 
+The boxed stack frames could not be garbage-collected, since the application expected that we will eventually reach a base-case and go back towards to `Main` function. This never happens, so all of them will remain unused on the heap.
 
 The problem was not solved, it was just moved from stack to heap.
 
 ## Summary
 
-While, I think this behavior is interesting, and could be useful for implementing stack-heavy Depth-first search algorithms, there are always different and cleaner options.
+While, I think this behavior is interesting, and could be useful for quick and dirty implementation of stack-heavy depth-first search algorithms, there are always different and cleaner options, better suited for production code.
 
-The real code is way slower than our exaggerated example application. The `Task.Delay(...)` will slow things down. It was expected to execute few times a day. At this rate, leaking few extra kilobytes would not cause immediate harm, but will cause memory issues in a longer run. 
+The real code is way slower than our exaggerated example application. The `Task.Delay(...)` will slow things down, the code was expected to execute few times a day. At this rate, leaking few extra kilobytes would not cause immediate harm, but will cause memory issues in a longer run. 
 
 The most dangerous aspect of this, that it could be undetected on lower environments, where deployments and restarts are performed often, and would crash on production environment, where the service is supposed to run for longer time uninterrupted.
 
