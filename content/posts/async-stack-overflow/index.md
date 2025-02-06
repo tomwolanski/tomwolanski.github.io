@@ -58,7 +58,7 @@ We will be reviewing three scenarios of recursive method without a base case.
 
 ## Synchronous methods - fast and ugly
 
-First, lets consider the basic example we are all familiar with. A recursive synchronous function with no base case. 
+First, lets consider the basic example we are all familiar with. A recursive, synchronous function with no base case. 
 
 ```csharp
 internal static class Program
@@ -87,7 +87,7 @@ Repeated 32130 times:
 
 ## Asynchronous methods 
 
-Our oryginal code was a long running service, that interacted with several remote systems like databases. Writing an IO code as an async code is now a standard, so let's check if there are any surprises.
+Our original code was a long running service, that interacted with several remote systems like databases. Writing an IO code as an async code is now a standard, so let's check if there are any surprises.
 
 ### Immediate return - no difference here
 
