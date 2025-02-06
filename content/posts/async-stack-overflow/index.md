@@ -8,22 +8,47 @@ draft: false
 hideToc : false
 tags:
   - async
-summary: "An interesing behaviour of recursive async functions. Synchronous stack overflow is well known, but what happens in async world?"
+summary: "An interesting behavior of recursive async functions. Synchronous stack overflow is well known, but what happens in async world?"
 
 ---
 
 ## Stack Overflow
 
-Almost everybody knows what stack overflow is, un recoverable crash of the program caused by infoking too many nested methods.
+Almost everybody knows what stack overflow is, un recoverable crash of the program caused by invoking too many nested methods.
 
-Most of the time we do not need to think about the stack, especially in managed word, where it is almost impossible to corrupt the memory. We do not need to go deep into the stack and heap relation, let assume it is an [implementation detail](https://learn.microsoft.com/en-us/archive/blogs/ericlippert/the-stack-is-an-implementation-detail-part-one), that worss for us, not aginst. 
+Most of the time we do not need to think about the stack, especially in managed word, where it is almost impossible to corrupt the memory. We do not need to go deep into the stack and heap relation, let assume it is an [implementation detail](https://learn.microsoft.com/en-us/archive/blogs/ericlippert/the-stack-is-an-implementation-detail-part-one), that works for us, not against. 
 
-Untill we reach its limits. 
+Until we reach its limits. 
 
-Recently I stumbled upon a piece of code that made me think. I would never write it, but it was there, in production code. 
+Recently I was looking thru active PRs and stumbled upon a piece of code that made me think. I would never write it, but it was there, waiting to be merged to the production code. 
+It was a background service, which would periodically (every 30 minutes) execute some work. It was using [Cronos](https://github.com/HangfireIO/Cronos) to await certain time, when the work should be done. It looks almost like this:
 
-// TODO - kod z fulfillmentu 
+```csharp
+internal class PeriodicJobBackgroundWorker : BackgroundService
+{
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        await RunTimedJobWithCron(stoppingToken);
+    }
 
+    async Task RunTimedJobWithCron(CancellationToken cancellationToken)
+    {
+        var now = DateTime.UtcNow;
+        var nextOccurrence = _cronJobSchedule.GetNextOccurrence(now, _previousOccurrence);
+        if (nextOccurrence.HasValue)
+        {
+            await Task.Delay(nextOccurrence.Value.Delay, cancellationToken);
+            _previousOccurrence = nextOccurrence;
+            await DoCoreWorkAsync(cancellationToken);
+        }
+
+        if (!cancellationToken.IsCancellationRequested)
+            await RunTimedJobWithCron(cancellationToken);
+    }
+}
+```
+
+I immediately wrote a comment, that the code will crash immediately after the startup, but the author claimed it works well. I had to test it.
 It did not crash the way I expected. I jumped into the rabbit hole.
 
 We will be reviewing three scenarios of recursive method without a base case.
@@ -40,14 +65,6 @@ internal static class Program
 {
     static void Main(string[] args)
     {
-        using var cts = new CancellationTokenSource();
-        Console.CancelKeyPress += (s, e) =>
-        {
-            cts.Cancel();
-         
-        };
-
-
         DoStuff();
     }
 
@@ -58,7 +75,7 @@ internal static class Program
 }
 ```
 
-There is no suprise here, the application crashed and was not able to recover:
+There is no surprise here, the application crashed and was not able to recover:
 ```
 Stack overflow.
 Repeated 32130 times:
@@ -68,39 +85,9 @@ Repeated 32130 times:
    at Recursive.Program.Main(System.String[])
 ```
 
-The original code had a cancellation token! 
-The `CancellationToken` in the orignal code represented an application shutdown. We'd like to have our application running withut an issue for a long time, so for simplicity let's assume the token is never cancelled.
-```csharp
-internal static class Program
-{
-    static void Main(string[] args)
-    {
-        DoStuff(default);
-    }
-
-    public static void DoStuff(CancellationToken cancellationToken)
-    {
-        if (!cancellationToken.IsCancellationRequested)
-        {
-            DoStuff(cancellationToken);
-        }   
-    }
-}
-```
-
-As expected, it crashed in simmilar manner:
-```
-Stack overflow.
-Repeated 32123 times:
---------------------------------
-   at Recursive.Program.DoStuff(System.Threading.CancellationToken)
---------------------------------
-   at Recursive.Program.Main(System.String[])
-```
-
 ## Asynchronous methods 
 
-Our oryginal code was a long running service, that interacted with several remote systems like databases. Writing an IO code as an async code is now a standard, so let's check if there are any suprises.
+Our oryginal code was a long running service, that interacted with several remote systems like databases. Writing an IO code as an async code is now a standard, so let's check if there are any surprises.
 
 ### Immediate return - no difference here
 
@@ -123,7 +110,7 @@ internal static class Program
 }
 ```
 
-As previously, the application crashed due to overflowing the stack. We expected this, especially after the synchronouos test.
+As previously, the application crashed due to overflowing the stack. We expected this, especially after the synchronous test.
 ```
 Stack overflow.
 Repeated 4191 times:
@@ -146,7 +133,7 @@ One may notice that our method does not do any real work. In the real service, w
 
 ### Real async call - wait, what?
 
-As stated before, our dummy method does not perform any actual work. Because it does not await any "real" asynchronous function, it could end synchronously. Thanks to this "hot path" optimization this scenario has extremly low memory usage, since nothing is boxed.
+As stated before, our dummy method does not perform any actual work. Because it does not await any "real" asynchronous function, it could end synchronously. Thanks to this "hot path" optimization this scenario has extremely low memory usage, since nothing is boxed.
 
 As described in [Dissecting the async methods in C#](https://devblogs.microsoft.com/premier-developer/dissecting-the-async-methods-in-c/) the async state machine states on the stack. Foreshadowing?
 
@@ -224,13 +211,61 @@ used: 7505105352 g0:914, g1:910, g2:13
 Memory profiler allows us to see what exactly happened:
 ![memory profiler showing difference of two snapshots](memory_profiler.png)
 
-By forcing the `DoStuffAsync` to finished asynchronously, the async state machine could no longer remain on the stack, had to be boxed into `syncTaskMethodBuilder+AsyncStateMachineBox<...>` type and moved to the heap. Unlike to stack, the heap can grow to accomadate all our boxed instances. 
+By forcing the `DoStuffAsync` to finished asynchronously, the async state machine could no longer remain on the stack, had to be boxed into `syncTaskMethodBuilder+AsyncStateMachineBox<...>` type and moved to the heap. Unlike to stack, the heap can grow to accommodate all our boxed instances. 
 
 The problem was not solved, it was just moved from stack to heap.
 
 ## Summary
 
-The real code is way slower than our exaggerated example application. The `Task.Delay(...)` will slow things down. It was expected to execute few times a day. At this rate, leaking few extra kilobytes would not cause immediate harm, but will cause memory issues in a longer run.
+While, I think this behavior is interesting, and could be useful for implementing stack-heavy Depth-first search algorithms, there are always different and cleaner options.
+
+The real code is way slower than our exaggerated example application. The `Task.Delay(...)` will slow things down. It was expected to execute few times a day. At this rate, leaking few extra kilobytes would not cause immediate harm, but will cause memory issues in a longer run. 
+
+The most dangerous aspect of this, that it could be undetected on lower environments, where deployments and restarts are performed often, and would crash on production environment, where the service is supposed to run for longer time uninterrupted.
+
+While in other languages like F# (tail-call optimization) or JavaScript (async based on message pump) would work without any issue, this is not the case in C#. Maybe it is better to be safe and not count on frequent service reboots to clean up the memory and do things in safer, more classical way, with a loop:
+
+```csharp
+internal class PeriodicJobBackgroundWorker : BackgroundService
+{
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        await RunTimedJobWithCron(stoppingToken);
+    }
+
+    async Task RunTimedJobWithCron(CancellationToken cancellationToken)
+    {
+        while(!cancellationToken.IsCancellationRequested)
+        {
+            var now = DateTime.UtcNow;
+            var nextOccurrence = _cronJobSchedule.GetNextOccurrence(now, _previousOccurrence);
+
+            await Task.Delay(nextOccurrence.Value.Delay, cancellationToken);
+            _previousOccurrence = nextOccurrence;
+            await DoCoreWorkAsync(cancellationToken);
+        }
+    }
+}
+```
+
+Or, if we know the operation will be always performed in constant intervals (as in our example), we can utilize more recent addition to the BCL: `System.Threading.Tasks.PeriodicTimer`. However, we will lose the versatility of Cron expressions.
+```csharp
+internal class PeriodicJobBackgroundWorker : BackgroundService
+{
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        TimeSpan period = GetPeriodFromConfig();
+
+        using var timer = new PeriodicTimer(period);
+
+        while(await timer.WaitForNextTickAsync(cancellationToken))
+        {
+            await DoCoreWorkAsync(cancellationToken);
+        }
+    }
+}
+
+
 
 
 
