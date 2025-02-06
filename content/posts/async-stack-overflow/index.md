@@ -14,7 +14,7 @@ summary: "An interesting behavior of recursive async functions. Synchronous stac
 
 ## Stack Overflow
 
-Almost everybody knows what stack overflow is, un recoverable crash of the program caused by invoking too many nested methods.
+Almost everybody knows what stack overflow is, an recoverable crash of the program caused by invoking too many nested methods.
 
 Most of the time we do not need to think about the stack, especially in managed word, where it is almost impossible to corrupt the memory. We do not need to go deep into the stack and heap relation, let assume it is an [implementation detail](https://learn.microsoft.com/en-us/archive/blogs/ericlippert/the-stack-is-an-implementation-detail-part-one), that works for us, not against. 
 
