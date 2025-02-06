@@ -214,7 +214,9 @@ Memory profiler allows us to see what exactly happened:
 By forcing the `DoStuffAsync` to finished asynchronously, the async state machine could no longer remain on the stack, had to be boxed into `syncTaskMethodBuilder+AsyncStateMachineBox<...>` type and moved to the heap. Unlike to stack, the heap can grow to accommodate all our boxed instances. 
 The boxed stack frames could not be garbage-collected, since the application expected that we will eventually reach a base-case and go back towards to `Main` function. This never happens, so all of them will remain unused on the heap.
 
-The problem was not solved, it was just moved from stack to heap.
+![heap allocations](allocation_chain.png)
+
+The problem was not solved, it was just moved from stack to the heap.
 
 ## Summary
 
