@@ -38,7 +38,7 @@ internal class PeriodicJobBackgroundWorker : BackgroundService
         if (nextOccurrence.HasValue)
         {
             await Task.Delay(nextOccurrence.Value.Delay, cancellationToken);
-            _previousOccurrence = nextOccurrence;
+            _previousOccurrence = DateTime.UtcNow;
             await DoCoreWorkAsync(cancellationToken);
         }
 
