@@ -1,8 +1,8 @@
 ---
 title: “Performance Improvements With Runtime Code Generation”
 date: 2026-03-30T18:22:26+01:00
-cover: “title.jpg”
-image: “title.jpg”
+cover: title.jpg
+image: title.jpg
 useRelativeCover: true
 tags:
   - performance
