@@ -1,5 +1,5 @@
 ---
-title: “Performance Improvements With Runtime Code Generation”
+title: Performance Improvements With Runtime Code Generation
 date: 2026-03-30T18:22:26+01:00
 cover: title.jpg
 image: title.jpg
@@ -10,7 +10,7 @@ tags:
   - expression trees
   - code generation
 toc: true
-summary: “An example how the flexibility of the system caused it to be slow, and how code generation improved solved the issue.”
+summary: An example how the flexibility of the system caused it to be slow, and how code generation improved solved the issue.
 ---
 
 
