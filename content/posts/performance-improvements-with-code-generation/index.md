@@ -10,7 +10,7 @@ tags:
   - expression trees
   - code generation
 toc: true
-summary: An example how the flexibility of the system caused it to be slow, and how code generation improved solved the issue.
+summary: An example how the flexibility of the system caused it to be slow, and how code generation improved the solution.
 ---
 
 
@@ -156,7 +156,7 @@ public class Program
 More information about reflection can be found at the 
 [learn.microsoft.com](https://learn.microsoft.com/en-us/dotnet/fundamentals/reflection/overview).
 
-Reflection is powerful, but it is well-known source of bugs and performance issues. It is has a noticeable impact on the performances and it is often discouraged to use it.
+Reflection is powerful, but it is well-known source of bugs and performance issues. Because of this, a rule of thumb is to not use it for a hot path logic if possible.
 
 
 
@@ -168,7 +168,7 @@ It was relatively easy to spot a potential problem. Back in the day of dotnet 6.
 I am referring to this approach as “interpreted” because of the way the rule engine works. It finds the necessary component as they are needed.
 ## Rule action
 
-Let’s start with a code that is used to call the `CustomFunction` after the rule condition was evaluated, and we determined that the rule matches the rule. I am going to start from here, since it is shorter code, but it illustrates what we are going to face.
+Let’s start with a code that is used to call the `CustomFunction` after the rule condition was evaluated, and we determined that the entity matches the rule. I am going to start from here, since it is shorter code, but it illustrates what we are going to face.
 
 ```csharp
 public static class RecalculationRuleInterpreter<TEntity>
@@ -368,7 +368,7 @@ Those attempts would not allow us to solve the other issue - storing values as s
 
 # Rewritten, "precompiled" implementation
 
-To solve both issues with over-usage usage of reflection and boxed values, I chose an implemntation that creates an in-memory code using expression trees. Such a tree can later be compiled to the IL, which has almost zero overhead compared to a standard "compiled" assembly.
+To solve both issues with over-usage usage of reflection and boxed values, I chose an implementation that creates an in-memory code using expression trees. Such a tree can later be compiled to the IL, which has almost zero overhead, comparable to a standard "compiled" assembly.
 
 ## Solving issue 1 - reducing reflection to startup time
 
@@ -708,7 +708,7 @@ bool IsMatch(User value)
 
 The ability to work on raw values without changing them into string allowed us to significantly improve our performance as well.
 Any condition method can be reinterpret code to match the exact type of the value without casting them to strings for each operation.
-This reduced unnecessary work and reduced allocations.
+This reduced unnecessary work and allocations.
 
 From this:
 ```csharp
@@ -736,7 +736,7 @@ public static class ConditionHandler
 
 I have written a simple benchmark to verify the improvements. 
 
-It executes a similar rule as provided in the intro section against various.
+It executes a similar rule as provided in the intro section against various versions of .NET.
 ```json
 {
   "CustomFunction": "SetFullTimeValidationStatus",
@@ -840,6 +840,7 @@ The following graph shows how the runtime evolved to reduce the reflection penal
 
 ![Interpreted code duration distribution](interpreded_comparision.png)
 
+That we can also see, how much potential improvement we would get for free just after updating .NET 6.0 to any newer version.
 
 # Summary
 
