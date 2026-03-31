@@ -840,7 +840,7 @@ The following graph shows how the runtime evolved to reduce the reflection penal
 
 ![Interpreted code duration distribution](interpreded_comparision.png)
 
-That we can also see, how much potential improvement we would get for free just after updating .NET 6.0 to any newer version.
+What we can also see, is how much potential improvement we would get for free just after updating .NET 6.0 to any newer version.
 
 # Summary
 
